@@ -28,16 +28,16 @@ if (cluster.isMaster) {
 	}
 
 	if (production) {
-		stopSignals.forEach(function (signal) {
-			process.on(signal, function () {
-				console.log(`Got ${signal}, stopping workers...`);
+    stopSignals.forEach((signal) => {
+      process.on((signal) => {
+        console.log(`Got ${signal}, stopping workers...`);
 				stopping = true;
-				cluster.disconnect(function () {
+				cluster.disconnect(() => {
 					console.log("All workers stopped, exiting.");
 					process.exit(0);
 				});
-			});
-		});
+      });
+    });
 	}
 } else {
 	const worker = cluster.worker;
